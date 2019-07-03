@@ -16,7 +16,7 @@ print(paragraphe[0])
 
 
 """
-for labelizing operations look url
+for labeling operations look url
 http://www.hurriyet.com.tr/kelebek/<category:saglik>
 when we store that news we have to create data for our model
 """
