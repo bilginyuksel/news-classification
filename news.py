@@ -67,6 +67,14 @@ def _findNews(url,category):
     return _news
 
 
+def _cleanContent(dirty_content):
+    #clean content here.
+
+    #diity content has h1 tags div tags a tags like ...
+    #replace all with '' _blank you can use regExp too.
+    _clean_content = dirty_content
+    return _clean_content
+
 def _newsContent(url,category):
     #find news content according to url and return News object
     _response  = requests.get(url)
@@ -74,10 +82,10 @@ def _newsContent(url,category):
         pass # do stuff here
     
     _soup = BeautifulSoup(_response.text,'html.parser')
-    dirty_content = _soup.findAll('div',{'class':'rhd-all-article-detail'}) #its dirty content for us
+    _dirty_content = _soup.findAll('div',{'class':'rhd-all-article-detail'}) #its dirty content for us
 
     #cleaning stuff here...
-    _content = dirty_content # cleaned version
+    _content = _cleanContent(_dirty_content) # cleaned version
 
     #This query has to change for hurriyet i guess this query like that
     return News(category,_content)
@@ -129,3 +137,15 @@ for i in news_list:
 
     except:
         print('Unknown news')
+
+print('****************************************************************************')
+print('For cleaning content purposes example Content')
+a_news = list_of_news[0]
+#Store news title too
+print('News Category :'+a_news.getCategory())
+print('News content : ',a_news.getContent()) #right now content is ResultSet it has to be string
+print('Category<Economy> news length :',len(list_of_news))
+print('*************************************************************************')
+#if you want to show News objects.
+for i in list_of_news:
+    print(i)
