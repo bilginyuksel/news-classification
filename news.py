@@ -3,7 +3,7 @@ import urllib.request
 import time
 from bs4 import BeautifulSoup
 
-url = 'http://www.hurriyet.com.tr/kelebek/saglik/gunes-carpmasi-nasil-gecer-gunes-carpmasina-ne-iyi-gelir-41262863'
+"""url = 'http://www.hurriyet.com.tr/kelebek/saglik/gunes-carpmasi-nasil-gecer-gunes-carpmasina-ne-iyi-gelir-41262863'
 
 response = requests.get(url) #Connect to url
 print(response) #if response==200 OK
@@ -13,7 +13,7 @@ soup = BeautifulSoup(response.text,'html.parser') #create parser
 #this query finds all paragraphes in news
 paragraphe= soup.findAll('div',{'class' :'rhd-all-article-detail'})
 print(paragraphe[0])
-
+"""
 
 """
 for labeling operations look url
@@ -40,23 +40,15 @@ class News():
     def getContent(self):
         return self.__content
 
+    def __str__(self):
+        return 'Title : {0} \nContent : {1}'.format(self.__category,self.__content)
 
 
 
 
-#We have to find news url's
-def find_news_url(response):
-    #find news url here then parse all news and get their content, category
-    soup = BeautifulSoup(response.text,'html.parser')
-
-    news_url = soup.findAll('a') #finds all a tags.  But we need news
-
-    #news_url[any_number]['href'] different usage
-
-    return news_url
     
 
-def _find_news(url,category):
+def _findNews(url,category):
     _url = url +'/'+category
     _response = requests.get(url)
     if _response == 200:
@@ -66,9 +58,13 @@ def _find_news(url,category):
     #prepare soup
     _soup = BeautifulSoup(_response.text,'html.parser')
 
-    _news = soup.findAll('a') #find all <category> news and return them
+    #this query using for finding news links.
+    _news = _soup.findAll('a',{'class':'main-news-box'}) #find all <category> news and return them
 
-    return _news[:]['href']
+
+    #This query using for finding titles of news. 
+    #_news = _soup.findAll('h3',{'class':'box-title'})
+    return _news
 
 
 def _newsContent(url,category):
@@ -78,10 +74,58 @@ def _newsContent(url,category):
         pass # do stuff here
     
     _soup = BeautifulSoup(_response.text,'html.parser')
-    dirty_content = _soup.findAll('p',{'class':'rhd-all-article-detail'}) #its dirty content for us
+    dirty_content = _soup.findAll('div',{'class':'rhd-all-article-detail'}) #its dirty content for us
 
     #cleaning stuff here...
     _content = dirty_content # cleaned version
 
     #This query has to change for hurriyet i guess this query like that
     return News(category,_content)
+
+
+
+__category = 'ekonomi'
+"""
+All economy news titles. on the main page.
+news_list = _findNews('http://www.hurriyet.com.tr/ekonomi/',__category)
+for i in news_list:
+    try:
+        print(i['title'])
+    except:
+        print('Author ')
+"""
+
+
+"""
+
+This base function finds news_url's
+
+news_list = _findNews('http://www.hurriyet.com.tr/ekonomi',__category)
+for i in news_list:
+    try:
+        print(i['href'])
+    except:
+        print('Unknown')
+
+
+__url = 'http://www.hurriyet.com.tr'+news_list[0]['href']
+print(__url)
+a_news =_newsContent(__url,__category)
+print(a_news)
+"""
+
+#Sample usage : 
+#First find news_url's then for every url find news contents. 
+
+list_of_news = []
+
+news_list = _findNews('http://www.hurriyet.com.tr/ekonomi',__category)
+for i in news_list:
+    try:
+        __url = 'http://www.hurriyet.com.tr'+i['href']
+        list_of_news.append(_newsContent(__url,__category)) #it is still dirty content 
+        time.sleep(1) #sleep every time while fetching the website
+        #for not marking as a spammer.
+
+    except:
+        print('Unknown news')
