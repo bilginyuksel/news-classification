@@ -2,8 +2,11 @@
 
 Sample Usage : 
 
-Go to news-classification directory <br>
->> news.py <--category--> <br>
-#Sample <br>
->> news.py ekonomi <br> 
-you can get economy news like that. <br>
+
+```terminal
+Go to news-classification directory 
+>> news.py <category> <news*i>
+#Sample
+>> news.py ekonomi 5
+you can get economy news like that.
+```
