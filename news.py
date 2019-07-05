@@ -125,8 +125,9 @@ print(a_news)
 #First find news_url's then for every url find news contents. 
 
 list_of_news = []
-
-news_list = _findNews('http://www.hurriyet.com.tr/ekonomi',__category)
+print("Category<{0}> : ".format(__category))
+print('Searching........ '+'http://www.hurriyet.com.tr/'+__category)
+news_list = _findNews('http://www.hurriyet.com.tr/'+__category,__category)
 for i in news_list:
     try:
         __url = 'http://www.hurriyet.com.tr'+i['href']
@@ -143,7 +144,7 @@ a_news = list_of_news[0]
 #Store news title too
 print('News Category :'+a_news.getCategory())
 print('News content : ',a_news.getContent()) #right now content is ResultSet it has to be string
-print('Category<Economy> news length :',len(list_of_news))
+print('Category<{0}> news length :'.format(__category),len(list_of_news))
 print('*************************************************************************')
 #if you want to show News objects.
 for i in list_of_news:
