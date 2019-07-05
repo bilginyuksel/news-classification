@@ -2,6 +2,7 @@ import requests
 import urllib.request
 import time
 from bs4 import BeautifulSoup
+import sys
 
 """url = 'http://www.hurriyet.com.tr/kelebek/saglik/gunes-carpmasi-nasil-gecer-gunes-carpmasina-ne-iyi-gelir-41262863'
 
@@ -69,10 +70,8 @@ def _findNews(url,category):
 
 def _cleanContent(dirty_content):
     #clean content here.
-
-    #diity content has h1 tags div tags a tags like ...
-    #replace all with '' _blank you can use regExp too.
-    _clean_content = dirty_content
+  
+    _clean_content = dirty_content.text
     return _clean_content
 
 def _newsContent(url,category):
@@ -82,8 +81,8 @@ def _newsContent(url,category):
         pass # do stuff here
     
     _soup = BeautifulSoup(_response.text,'html.parser')
-    _dirty_content = _soup.findAll('div',{'class':'rhd-all-article-detail'}) #its dirty content for us
-
+    #_dirty_content = _soup.findAll('div',{'class':'rhd-all-article-detail'}).find('p') #its dirty content for us
+    _dirty_content = _soup.find('div',{'class':'rhd-all-article-detail'}).find('p')
     #cleaning stuff here...
     _content = _cleanContent(_dirty_content) # cleaned version
 
@@ -92,7 +91,7 @@ def _newsContent(url,category):
 
 
 
-__category = 'ekonomi'
+__category = sys.argv[1]
 """
 All economy news titles. on the main page.
 news_list = _findNews('http://www.hurriyet.com.tr/ekonomi/',__category)
