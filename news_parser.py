@@ -23,7 +23,7 @@ def get_links(click_time = 1):
 
 
     selen = driver.find_elements_by_css_selector('.b-stories__img')
-    print('Economy news length :',len(selen))
+    print('News length :',len(selen))
     links = []
     for i in selen:
         links.append(i.get_attribute('href'))
