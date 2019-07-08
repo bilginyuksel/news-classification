@@ -4,7 +4,7 @@ import time
 
 driver = None
 
-def start_connection(driver_path="C:/Users/FX505/Desktop/news-classification/geckodriver.exe",url = 'https://tr.sputniknews.com/'):
+def start_connection(driver_path="geckodriver.exe",url = 'https://tr.sputniknews.com/'):
     #__url = url +sys.argv[1]+'/' #https://tr.sputniknews.com/ekonomi/
     global driver
     driver = webdriver.Firefox(executable_path = driver_path)

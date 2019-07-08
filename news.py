@@ -4,6 +4,7 @@ import sys
 import time
 import news_parser as parser
 import pandas
+import prepare_news as pn
 
 
 class News():
@@ -11,6 +12,8 @@ class News():
         self.__category = category
         self.__title = title
         self.__content = content
+
+    
 
     def getCategory(self):
         return self.__category
@@ -69,9 +72,26 @@ def _clear_content(content):
 
 news_objects = __news_objects(news_link)
 news_data = [[]]
+last_news = None
 for i in news_objects:
     news_data.append([i.getCategory(),i.getTitle(),_clear_content(i.getContent())])
+    last_news = _clear_content(i.getContent())
+
+
+
+print('Detailed Last News Content')
+print(last_news)
 
 news_dataframe = pandas.DataFrame(news_data)
 print('Data Frame Version' )
 print(news_dataframe)
+list_of_words = []
+for i in news_objects:
+    list_of_words = list_of_words+pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))
+
+
+model = pn.frequency(pn.create_model(pn.final_cleaning(list_of_words)))
+
+model.to_csv("output.csv")
+
+
