@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+﻿<<<<<<< HEAD
 ﻿Ilk olarak yapılması gereken verilerin toplanması işlemidir. Oluşturacağımız haber kategorileme makine öğrenmesi
 modeli için veriler farklı haber sitelerinden toplanabilir. Veri kategori sayısı tamamen gruba kalmış bir özelliktir.
 Fazla kategori iş gücünü arttırır. Ben bu attığım örnekte hürriyet sitesinin bir haberini nasıl çekebileceğimizi
@@ -26,5 +26,3 @@ Id word0 word1 .... label<category>
 ...
 
 Bu data modeli oluştuktan sonra bir çok makine öğrenmesi algoritması ile gerçeklenip en başarılı model
->>>>>>> 32dd6f7edd6f5128df316156fc1734a5f73b0895
-seçilebilir.
