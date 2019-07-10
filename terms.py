@@ -12,6 +12,7 @@ def routineSoupPreparation(url):
 
 
 class Terms():
+    #Scraping terms need's to clear. Not fits the news style.
     __terms = []
     def economy(self):
         soup = routineSoupPreparation('https://www.uyumsoft.com/bilmeniz-gereken-temel-ekonomi-terimleri/')
@@ -36,7 +37,14 @@ class Terms():
             self.__terms.append(str(i))
     def health(self):
         soup = routineSoupPreparation('https://blog.konusarakogren.com/ingilizce-tibbi-terimler/')
-        terms = soup.find('div',{'class','post-inner'}).find_all('p')
+        # new usage of terms . should be like that .
+        # terms = str(soup.find('div',{'class','post-inner'}).find_all('p'))
+        # useless_tags = ['strong','>','<','/','[',']',':',',','\xa0']
+        # terms.lower()
+        # for i in useless_tags:
+        #     terms.replace(i,' ')
+        # terms = terms.split()
+
         for i in terms:
             self.__terms.append(str(i))
     def terms(self):
@@ -52,8 +60,9 @@ class Terms():
 def getTermsList():
     t = Terms()
     t.getAllTerms()
-    all_terms = list(t.terms())
+    all_terms = list(t.terms()) #terms are set and sets are not iterable
 
+    #clean tags from terms recent using tags are stored below.
     tags = ['strong', '<p', 'p>', ',', ':', '/','br','\r','\n','\xa0','<','>']
 
     for i in range(len(all_terms)):

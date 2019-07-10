@@ -91,19 +91,22 @@ news_terms = terms.getTermsList() #Our dataframes columns
 data = {}
 #initialize dictionarys columns
 for i in news_terms:
-    data[i] = 0
+    data[i] =[0 for i in range(len(news_objects))] 
 
+#dataframe key,value
+#data['key'] = value..  // data['key'] = [values...]
 
 #after initialization of data columns now fill one row with one news
 #means you will calculate the frequency of each terms
-for i in news_objects:
+for i in range(len(news_objects)):
     cout = 0
-    news = pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))
-    for i in news:
-        for j in news_terms:
-            if j in i:
-                cout+=1 #cout storing for % 
-                data[j]+=1
+    news = pn.conjuction_prepositions(pn.listModel(pn.clear(news_objects[i].getContent())))
+    for j in news:
+        for k in news_terms:
+            if k in j:
+                cout +=1 #cout storing for % 
+                data[k][i]+=1
+
 
 """
 this method should work for calculating % data[i] /= cout 
@@ -120,6 +123,7 @@ for i in news_terms:
 
 print(data) #Sample data output.
 dataFrame = pandas.DataFrame(data)
+print(dataFrame)
 
 #print dataFrame
 
