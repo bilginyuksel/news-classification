@@ -34,19 +34,23 @@ __model_columns = [] #Means words that model contains
 
 
 def clear(content):
-    new_content1 = content.replace('©','')
-    new_content2 = new_content1.translate(str.maketrans('','',string.punctuation))
-    return new_content2
+    #we should clear dummy characters from content
+    dummy_characters = ['©','\n','\xa0','\t']
+    for i in dummy_characters:
+        content = content.replace(i,'')
+    
+    content = content.translate(str.maketrans('','',string.punctuation))
+    return content
 
-def listModel(new_content2):
-    new_content3 =  new_content2.split(' ')
-    while '' in new_content3:
-        new_content3.remove('')
-    while '\n' in new_content3:
-        new_content3.remove('\n')
-    new_content3 = [x.lower() for x in new_content3]
+def listModel(content):
+    content =  content.split(' ')
+    while '' in content:
+        content.remove('')
+    while '\n' in content:
+        content.remove('\n')
+    content = [x.lower() for x in content]
 
-    return new_content3
+    return content
 
 __conjuctions_prepositions_TR = stopwords.words('turkish')
 

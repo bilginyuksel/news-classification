@@ -5,6 +5,7 @@ import time
 import news_parser as parser
 import pandas
 import prepare_news as pn
+import terms
 
 
 class News():
@@ -60,12 +61,12 @@ def __news_objects(news_link):
 
     return news
 
-def _clear_content(content):
-    #© this sign exists
-    _dirty = str(content)
-    _dirty = _dirty.replace('©','')
-    _dirty = _dirty.replace('\n','')
-    return _dirty
+# def _clear_content(content):
+#     #© this sign exists
+#     _dirty = str(content)
+#     _dirty = _dirty.replace('©','')
+#     _dirty = _dirty.replace('\n','')
+#     return _dirty
 
 
 
@@ -73,25 +74,68 @@ def _clear_content(content):
 news_objects = __news_objects(news_link)
 news_data = [[]]
 last_news = None
+# for i in news_objects:
+#     news_data.append([i.getCategory(),i.getTitle(),_clear_content(i.getContent())])
+#     last_news = _clear_content(i.getContent())
+
+
+
+"""
+NOTE !!!!
+this code block written for only test purposes on the real usage
+you can't use this code because, values are not lists here and cout variable 
+initalizes to 0 for once. If you solve this issues you can use this code.
+"""
+
+news_terms = terms.getTermsList() #Our dataframes columns
+data = {}
+#initialize dictionarys columns
+for i in news_terms:
+    data[i] = 0
+
+
+#after initialization of data columns now fill one row with one news
+#means you will calculate the frequency of each terms
 for i in news_objects:
-    news_data.append([i.getCategory(),i.getTitle(),_clear_content(i.getContent())])
-    last_news = _clear_content(i.getContent())
+    cout = 0
+    news = pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))
+    for i in news:
+        for j in news_terms:
+            if j in i:
+                cout+=1 #cout storing for % 
+                data[j]+=1
+
+"""
+this method should work for calculating % data[i] /= cout 
+not working on this version i didn't debug it .
+
+#calculate the percent of repeating number
+for i in news_terms:
+    try:
+        data[i] /= cout
+    except:
+        #for zero division error
+        pass
+"""
+
+print(data) #Sample data output.
+dataFrame = pandas.DataFrame(data)
+
+#print dataFrame
+
+
+# list_of_words = []
+# for i in news_objects:
+#     list_of_words = list_of_words+pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))
+#     print(pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))) #what i want
+    
 
 
 
-print('Detailed Last News Content')
-print(last_news)
-
-news_dataframe = pandas.DataFrame(news_data)
-print('Data Frame Version' )
-print(news_dataframe)
-list_of_words = []
-for i in news_objects:
-    list_of_words = list_of_words+pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))
 
 
-model = pn.frequency(pn.create_model(pn.final_cleaning(list_of_words)))
+# model = pn.frequency(pn.create_model(pn.final_cleaning(list_of_words)))
 
-model.to_csv("output.csv")
+# model.to_csv("output.csv")
 
 

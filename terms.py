@@ -40,7 +40,7 @@ class Terms():
         for i in terms:
             self.__terms.append(str(i))
     def terms(self):
-        return self.__terms
+        return set(self.__terms)
 
     def getAllTerms(self):
         self.economy()
@@ -48,14 +48,19 @@ class Terms():
         #self.world()
         self.sport()
         self.health()
-t = Terms()
-t.getAllTerms()
-all_terms = t.terms()
 
-tags = ['strong', '<', '>', ',', ':', 'p', '/','br','\r','\n']
+def getTermsList():
+    t = Terms()
+    t.getAllTerms()
+    all_terms = list(t.terms())
 
-for i in range(len(all_terms)):
-    for j in tags:
-        all_terms[i] = all_terms[i].replace(j,'')
+    tags = ['strong', '<p', 'p>', ',', ':', '/','br','\r','\n','\xa0','<','>']
 
-print(all_terms)
+    for i in range(len(all_terms)):
+        all_terms[i] = all_terms[i].lower()
+        for j in tags:
+            all_terms[i] = all_terms[i].replace(j,'')
+    while '' in all_terms:
+        all_terms.remove('')
+
+    return all_terms
