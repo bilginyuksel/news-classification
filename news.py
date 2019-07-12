@@ -108,6 +108,17 @@ for i in range(len(news_objects)):
                 data[k][i]+=1
 
 
+#this loops for finding repeating percents. %
+summ = 0
+for i in news_terms:
+    for j in range(len(news_objects)):
+        summ += data[i][j]
+    for j in range(len(news_objects)):
+        if summ!=0:
+            data[i][j] /= summ
+    summ = 0 
+
+
 """
 this method should work for calculating % data[i] /= cout 
 not working on this version i didn't debug it .
@@ -133,9 +144,6 @@ print(dataFrame)
 #     list_of_words = list_of_words+pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))
 #     print(pn.conjuction_prepositions(pn.listModel(pn.clear(i.getContent())))) #what i want
     
-
-
-
 
 
 # model = pn.frequency(pn.create_model(pn.final_cleaning(list_of_words)))
