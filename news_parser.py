@@ -13,11 +13,11 @@ def start_connection(driver_path="geckodriver.exe",url = 'https://tr.sputniknews
 
 
 def get_links(click_time = 1):
-    time.sleep(1)
+    #time.sleep(1)
     print('Searching....')
 
     for i in range(click_time):
-        time.sleep(0.5)
+        time.sleep(1.2)
         driver.find_element_by_css_selector('.b-btn.m-more').click()
 
 
