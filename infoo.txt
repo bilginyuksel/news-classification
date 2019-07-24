@@ -1,7 +1,10 @@
-<Cat> News : 220
-<Cat> News : 220
-<Cat> News : 240
-<Cat> News : 220
-<Cat> News : 200
+<Ekonomi> News : 220
+<Spor> News : 220
+<Politika> News : 240
+<Yasam> News : 220
+<Dunya> News : 200
 
-Need's to label.
+1. Labeling Data
+2. Delete the useless terms (features)
+3. Information and describe of data.
+and so on...
