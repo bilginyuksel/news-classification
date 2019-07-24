@@ -45,7 +45,6 @@ models = {'K-nn':KNeighborsClassifier(n_neighbors = 15),
 # knn = KNeighborsClassifier(n_neighbors = 15)
 # knn.fit(train_x,train_y)
 
-print()
 #fit data
 for i in models.values():
     i.fit(train_x,train_y)
@@ -53,6 +52,10 @@ for i in models.values():
 #find models scores
 for i,j in zip(models.keys(),models.values()):
     print(i,"guesses :",j.score(test_x,test_y))
+
+def randomforest_predict(news):
+    global models
+    return models['RandomForest'].predict(news)
 
 
 # predict test data
