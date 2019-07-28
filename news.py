@@ -118,6 +118,10 @@ data = {}
 #             data[i][j] /= summ
 #     summ = 0 
 
+def help_clean(data):
+    return pn.conjuction_prepositions(pn.listModel(pn.clear(data)))
+
+
 def getMultipleNews(category):
     global news_terms
     global data

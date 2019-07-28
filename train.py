@@ -34,6 +34,7 @@ data.loc[900:1100,'Category'] = "dunya"
 # continue with clean data
 clear_data = data.loc[:899]
 
+
 # cross validation
 train_x,test_x,train_y,test_y = train_test_split(clear_data.drop('Category',axis=1),clear_data.Category,test_size =0.2)
 
@@ -57,6 +58,9 @@ def randomforest_predict(news):
     global models
     return models['RandomForest'].predict(news)
 
+def model_columns():
+    global clear_data
+    return clear_data.drop('Category',axis=1).columns
 
 # predict test data
 
