@@ -7,10 +7,10 @@ Sample Usage :
 
 ```terminal
 Go to news-classification directory 
->> news.py <category> <news*i>
-#Sample
->> news.py ekonomi 5
-you can get economy news like that.
+>> python model.py <FILE_PATH>.txt
+#In project test file exists
+>> python model.py news.txt
+You will see the result.
 ```
 
 
