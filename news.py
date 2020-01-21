@@ -128,23 +128,23 @@ def getMultipleNews(category):
     # get so much link
     __url = "https://tr.sputniknews.com/"+"ekonomi"+"/"
     parser.start_connection(url =__url)
-    links = parser.get_links(13)
+    links = parser.get_links()
     parser.close_connection()
     __url = "https://tr.sputniknews.com/"+"spor"+"/"
     parser.start_connection(url =__url)
-    links += parser.get_links(13)
+    links += parser.get_links()
     parser.close_connection()
     __url = "https://tr.sputniknews.com/"+"politika"+"/"
     parser.start_connection(url =__url)
-    links += parser.get_links(13)
+    links += parser.get_links()
     parser.close_connection()
     __url = "https://tr.sputniknews.com/"+"yasam"+"/"
     parser.start_connection(url =__url)
-    links += parser.get_links(13)
+    links += parser.get_links()
     parser.close_connection()
     __url = "https://tr.sputniknews.com/"+"dunya"+"/"
     parser.start_connection(url =__url)
-    links += parser.get_links(13)
+    links += parser.get_links()
     parser.close_connection()
 
     for i in news_terms:
